@@ -31,8 +31,7 @@ jobs:
           MY_SECRET_KEY: ${{ secrets.MY_SECRET_KEY }}
 
         run: |
-          echo "Pipeline Berjalan Sukses di GitHub Actions!"
-          
+          echo "Pipeline Berjalan Sukses di GitHub Actions!"          
           echo "Memeriksa secret key..."
 
   # This workflow contains a single job called "build"
