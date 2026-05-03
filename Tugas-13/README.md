@@ -131,24 +131,24 @@ git commit -m "Trigger CI"
 git push origin main
 ```
 
-- ✅ Preview - xxx
-  ![Bootcamp Digital Skill Sanbercode](ss-github-actions/xxx.png)
+- ✅ Preview - Test to trigger the workflow
+  ![Bootcamp Digital Skill Sanbercode](ss-github-actions/4a-test-trigger-CI.png)
 
 <br>
 
-##### Step 5 — xxx
+##### Step 5 — Monitor Execution
+
+- [x] 1. Go to your repository on GitHub
+- [x] 2. Click Actions tab
+- [x] 3. Select "CI Core Test"
+- [x] 4. Click the latest run
+- [x] 5. Open Test-Pipeline job
+
+- ✅ Preview - MOnitor Execution of CI Pipeline
+  ![Bootcamp Digital Skill Sanbercode](ss-github-actions/4d-test-trigger-CI.png)
 
 ---
 
-### 3️⃣ Verification xxx
-
----
-
-### 4️⃣ Advanced (Recommended for Production)
-
-- ✅ **xxx**
-
-- ✅ Preview - xxx
-  ![Bootcamp Digital Skill Sanbercode](ss-github-actions/xxx.png)
+### 3️⃣ Verify Output
 
 ---
