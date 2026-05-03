@@ -127,9 +127,8 @@ jobs:
 ```
 
 - ✅ Preview - Create new workflow (YAML)
-  ![Bootcamp Digital Skill Sanbercode](ss-github-actions/1a-new-workflow-yaml.png)
-- ✅ Preview - Create new workflow (YAML)
-  ![Bootcamp Digital Skill Sanbercode](ss-github-actions/1b-new-workflow-yaml.png)
+  ![Bootcamp Digital Skill Sanbercode](ss-github-actions/1-new-workflow-yaml.png)
+
   <br>
 
 ##### Step 3 — Explanation (Important for DevOps Understanding)
@@ -165,13 +164,10 @@ uses: actions/upload-artifact@v4
 ##### Step 4 — Commit & Push Workflow
 
 ```bash
-git add .github/workflows/ci.yml
-git commit -m "Add build-app job with artifact upload"
-git push origin main
+$ git add .github/workflows/build.yml
+$ git commit -m "Add build-app job with artifact upload"
+$ git push origin main
 ```
-
-- ✅ Preview - Test to trigger the workflow
-  ![Bootcamp Digital Skill Sanbercode](ss-github-actions/4a-test-trigger-CI.png)
 
 <br>
 
@@ -191,8 +187,8 @@ You will see:
 
 <br>
 
-- ✅ Preview - Monitor Execution of CI Pipeline  
-  ![Bootcamp Digital Skill Sanbercode](ss-github-actions/4d-test-trigger-CI.png)
+- ✅ Preview - Test to trigger the workflow
+  ![Bootcamp Digital Skill Sanbercode](ss-github-actions/2-test-trigger-workflow.png)
 
 ---
 
@@ -212,8 +208,10 @@ dist/index.html
 
 <br>
 
-- ✅ Preview - Verify SECRET_KEY is hidden (masked)
-  ![Bootcamp Digital Skill Sanbercode](ss-github-actions/5b-view-exec-log.png)
+- ✅ Preview - download artifact
+  ![Bootcamp Digital Skill Sanbercode](ss-github-actions/3-download-artifact.png)
+- ✅ Preview - Verify artifact → Automation Build is success
+  ![Bootcamp Digital Skill Sanbercode](ss-github-actions/4-verify-artifact-build-success.png)
 
 ---
 
