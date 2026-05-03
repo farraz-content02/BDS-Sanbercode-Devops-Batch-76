@@ -1,0 +1,35 @@
+name: CI Core Test
+
+# Trigger: workflow runs on every push to 'main' branch
+on:
+  push:
+    branches:
+      - main # Sesuaikan ini! Jika default branch kalian 'master', ganti ke 'master'
+
+jobs:
+  Test-Pipeline:
+    # Runner environment (Ubuntu latest stable image)
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout repository code into the runner
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # Step 2: Execute test script and access repository secret
+      - name: Run Test Script
+        # Inject secret into environment variable (best practice)
+        env:
+          MY_SECRET_KEY: ${{ secrets.MY_SECRET_KEY }}
+
+        run: |
+          # Simple pipeline indicator
+          echo "Pipeline Berjalan Sukses di GitHub Actions!"
+
+          # Informational log
+          echo "Memeriksa secret key..."
+
+          # IMPORTANT:
+          # GitHub automatically masks secrets in logs (***)
+          # Even if echoed, the actual value will not be exposed
+          echo "Secret Key: $MY_SECRET_KEY"
