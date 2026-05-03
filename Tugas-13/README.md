@@ -8,9 +8,6 @@
 
 ```bash
 $ mkdir Tugas-13
-
-# Then, create separate folder to test-Github Action
-$ mkdir Test-Github-action
 ```
 
 ---
@@ -19,22 +16,28 @@ $ mkdir Test-Github-action
 
 ##### Step 1 — Create Workflow File
 
+- ✅ Use AI to generate GitHub Actions workflow YAML
+  **Prompt:**
+
+  > _Create a GitHub Actions YAML workflow file for me. This workflow will run every time someone pushes to the 'main' branch. Create a job named 'Test-Pipeline' that runs on ubuntu-latest. This job should checkout the code, then run a simple echo command that prints 'Pipeline Running!' and prints the value of the repository secret named 'MY_SECRET_KEY' (remember to mask the value).
+  > Then guide me step-by-step how to create it, setup it, and use it in Github Actions._
+
 - ✅ From your local repository:
 
 ```bash
-# Navigate to your project (pwd)
-cd Test-Github-action
+# Navigate to your project (pwd - main dir)
+$ cd Test-Github-action
 
 # Create GitHub Actions directory
-mkdir -p .github/workflows
+$ mkdir -p .github/workflows
 
 # Create workflow file (in WSL/Linux)
-nano .github/workflows/ci-core-test.yml
+$ nano .github/workflows/ci-core-test.yml
 
 # In VSCode, you will be prompted to install new extensions "Github Actions" (by Github)
 ```
 
-- ✅ Paste the YAML above, then save.
+- ✅ Paste the YAML from AI above, then Save (name: `ci-core-test.yml`).
 
 ```YAML
 name: CI Core Test
@@ -125,10 +128,11 @@ The workflow will automatically run when you push to main.
 You can also trigger it manually by pushing a small change:
 
 ```bash
-echo "test" >> test.txt
-git add .
-git commit -m "Trigger CI"
-git push origin main
+# you can do test (modif) at main / sub-dir
+$ echo "test" >> test.txt
+$ git add .
+$ git commit -m "Trigger CI"
+$ git push origin main
 ```
 
 - ✅ Preview - Test to trigger the workflow
