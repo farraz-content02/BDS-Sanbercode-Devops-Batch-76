@@ -17,27 +17,28 @@ $ mkdir Tugas-13
 ##### Step 1 — Create Workflow File
 
 - ✅ Use AI to generate GitHub Actions workflow YAML
-  **Prompt:**
 
-  > _Create a GitHub Actions YAML workflow file for me. This workflow will run every time someone pushes to the 'main' branch. Create a job named 'Test-Pipeline' that runs on ubuntu-latest. This job should checkout the code, then run a simple echo command that prints 'Pipeline Running!' and prints the value of the repository secret named 'MY_SECRET_KEY' (remember to mask the value).
-  > Then guide me step-by-step how to create it, setup it, and use it in Github Actions._
+**Prompt:**
+
+> _Create a GitHub Actions YAML workflow file for me. This workflow will run every time someone pushes to the 'main' branch. Create a job named 'Test-Pipeline' that runs on ubuntu-latest. This job should checkout the code, then run a simple echo command that prints 'Pipeline Running!' and prints the value of the repository secret named 'MY_SECRET_KEY' (remember to mask the value).
+> Then guide me step-by-steps how to create it, setup it, and use it in Github Actions._
 
 - ✅ From your local repository:
 
 ```bash
 # Navigate to your project (pwd - main dir)
-$ cd Test-Github-action
+$ cd BDS-Sanbercode-Devops-Batch-76
 
 # Create GitHub Actions directory
 $ mkdir -p .github/workflows
 
-# Create workflow file (in WSL/Linux)
-$ nano .github/workflows/ci-core-test.yml
+# Create workflow file (in WSL/Linux): main.yml
+$ nano .github/workflows/main.yml
 
 # In VSCode, you will be prompted to install new extensions "Github Actions" (by Github)
 ```
 
-- ✅ Paste the YAML from AI above, then Save (name: `ci-core-test.yml`).
+- ✅ Paste the YAML from AI above, then Save (`main.yml`).
 
 ```YAML
 name: CI Core Test
