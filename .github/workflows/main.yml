@@ -6,9 +6,9 @@ name: CI Core Test
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: [ "main" ]
+    branches: ['main']
   pull_request:
-    branches: [ "main" ]
+    branches: ['main']
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -32,24 +32,36 @@ jobs:
 
         run: |
           echo "Pipeline Berjalan Sukses di GitHub Actions!"          
-          echo "Memeriksa secret key..."
+          echo "Memeriksa secret key..."          
+          echo "::add-mask::$MY_SECRET_KEY"
+          echo "Secret key is set and masked successfully."
+        # Mask the secret in logs
+        # Note: GitHub automatically masks secrets in logs, but this ensures it's masked even if echoed directly
+        # Use this pattern to prevent accidental exposure in logs during debugging
+        #  if [ -z "$MY_SECRET_KEY" ]; then
+        #    echo "Error: Secret key is not set!"
+        #    exit 1
+        #  else
+        #    echo "Secret key is set and masked successfully."
+        #  fi
 
   # This workflow contains a single job called "build"
   #build:
-    # The type of runner that the job will run on
-    #runs-on: ubuntu-latest
+  # The type of runner that the job will run on
+  #runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    #steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      #- uses: actions/checkout@v4
+  # Steps represent a sequence of tasks that will be executed as part of the job
+  #steps:
+  # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+  #- name: Checkout Code
+  #  uses: actions/checkout@v4
 
-      # Runs a single command using the runners shell
-      #- name: Run a one-line script
-      #  run: echo Hello, world!
+  # Runs a single command using the runners shell
+  #- name: Run a one-line script
+  #  run: echo Hello, world!
 
-      # Runs a set of commands using the runners shell
-      #- name: Run a multi-line script
-      #  run: |
-      #    echo Add other actions to build,
-      #    echo test, and deploy your project.
+  # Runs a set of commands using the runners shell
+  #- name: Run a multi-line script
+  #  run: |
+  #    echo Add other actions to build,
+  #    echo test, and deploy your project.
