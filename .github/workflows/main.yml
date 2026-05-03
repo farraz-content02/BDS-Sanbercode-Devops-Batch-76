@@ -33,7 +33,7 @@ jobs:
         run: |
           echo "Pipeline Berjalan Sukses di GitHub Actions!"          
           echo "Memeriksa secret key..."          
-          echo "::add-mask::$MY_SECRET_KEY"
+          echo "::add-mask::${{ secrets.MY_SECRET_KEY }}"
           echo "Secret key is set and masked successfully."
         # Mask the secret in logs
         # Note: GitHub automatically masks secrets in logs, but this ensures it's masked even if echoed directly
