@@ -144,11 +144,16 @@ git push origin main
 - [x] 4. Click the latest run
 - [x] 5. Open Test-Pipeline job
 
-- ✅ Preview - MOnitor Execution of CI Pipeline
+- ✅ Preview - Monitor Execution of CI Pipeline
   ![Bootcamp Digital Skill Sanbercode](ss-github-actions/4d-test-trigger-CI.png)
 
 ---
 
-### 3️⃣ Verify Output
+### 3️⃣ Verify Output (View Log)
+
+- ✅ Preview - View raw log
+  ![Bootcamp Digital Skill Sanbercode](ss-github-actions/5a-view-exec-log.png)
+- ✅ Preview - Verify SECRET_KEY is hidden (masked)
+  ![Bootcamp Digital Skill Sanbercode](ss-github-actions/5b-view-exec-log.png)
 
 ---
