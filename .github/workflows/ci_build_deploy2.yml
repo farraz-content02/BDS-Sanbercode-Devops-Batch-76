@@ -33,7 +33,7 @@ jobs:
 
       # Step 3: Upload artifact
       - name: Upload Build Artifact
-        uses: actions/upload-artifact@v4 # upload-artifact
+        uses: actions/upload-artifact@v4
         with:
           name: hasil-build-web
           path: dist/
@@ -46,29 +46,32 @@ jobs:
     steps:
       # 1. Download artifact from previous job
       - name: Download Build Artifact
-        uses: actions/download-artifact@v4 # download-artifact
+        uses: actions/download-artifact@v4
         with:
           name: hasil-build-web
           path: dist/
 
-      - name: Setup SSH Key
-        # new dir (~/.ssh) → Set correct permissions
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
+      # 2. Transfer files using SCP (via appleboy action)
+      - name: Copy Artifact to VPS
+        uses: appleboy/scp-action@v0.1.7 # concern > scp-action → file transfer only
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: 'dist/*'
+          target: '/backend-node' # Sesuaikan path di VPS kalian
+          strip_components: 1 # removes "dist/" nesting (important)
 
-      - name: Add VPS to Known Hosts
-        run: |
-          ssh-keyscan -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
-
-      - name: Copy Files to VPS (SCP)
-        # scp [opsi] /path/sumber user@IP_Server:/path/tujuan
-        run: |
-          scp -r dist/* ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/var/www/app/
-          chown -R 755 /var/www/app/
-          chown -R www-data:www-data /var/www/app/
-
-      - name: Execute Remote Command (SSH)
-        run: |
-          ssh {{ secrets.VPS_USER }}@{{ secrets.VPS_HOST }} "echo Deployment Done!"
+      # 3. Execute remote command via SSH
+      - name: Execute Remote Command
+        uses: appleboy/ssh-action@v1.0.3 # concern > ssh-action → remote orchestration
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            echo "Memulai proses restart service di VPS..."
+            pm2 restart
+            echo "Memulai proses deployment di VPS..."
+            ls -la ~/backend-node
+            echo "Deployment Production Sukses!"
