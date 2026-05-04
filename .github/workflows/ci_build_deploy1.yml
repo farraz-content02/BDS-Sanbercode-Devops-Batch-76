@@ -33,7 +33,7 @@ jobs:
 
       # Step 3: Upload artifact
       - name: Upload Build Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v4 # upload-artifact
         with:
           name: hasil-build-web
           path: dist/
@@ -46,7 +46,7 @@ jobs:
     steps:
       # 1. Download artifact from previous job
       - name: Download Build Artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v4 # download-artifact
         with:
           name: hasil-build-web
           path: dist/
@@ -62,12 +62,12 @@ jobs:
         run: |
           ssh-keyscan -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
 
-#      - name: Copy Files to VPS (SCP)
-# scp [opsi] /path/sumber user@IP_Server:/path/tujuan
-#        run: |
-#          scp -r dist/* {{ secrets.VPS_USER }}@{{ secrets.VPS_HOST }}:/var/www/html/
-#          chown -R 755 /var/www/html
-#          chown -R www-data:www-data /var/www/html
+      - name: Copy Files to VPS (SCP)
+        # scp [opsi] /path/sumber user@IP_Server:/path/tujuan
+        run: |
+          scp -r dist/* ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/var/www/html/
+          chown -R 755 /var/www/html
+          chown -R www-data:www-data /var/www/html
 
 #      - name: Execute Remote Command (SSH)
 #        run: |
