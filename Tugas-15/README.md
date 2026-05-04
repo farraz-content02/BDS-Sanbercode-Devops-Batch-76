@@ -159,9 +159,9 @@ jobs:
       - name: Copy Artifact to VPS
         uses: appleboy/scp-action@v0.1.7
         with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USERNAME }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: "dist/*"
           target: "/var/www/aplikasi-saya"
           strip_components: 1   # removes "dist/" nesting (important)
@@ -170,9 +170,9 @@ jobs:
       - name: Execute Remote Command
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USERNAME }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             echo "Memulai proses deployment di VPS..."
             ls -la /var/www/aplikasi-saya
@@ -204,6 +204,10 @@ jobs:
 
 ```bash
 #$ cd ~
+$ ls ~/.ssh
+# output: id_ed25519  id_ed25519.pub
+# known_hosts  known_hosts.old  ssh-copy-id.bLBd826KHh
+
 $ cat ~/.ssh/id_ed25519
 # It is 'Private key', instead of public key
 ```
@@ -323,16 +327,22 @@ This is the result of an automated build artifact
 
 ❌ SCP fails
 
-→ Check:
+→ Check: goto VPS
 
 ```bash
-$ /var/www/html permissions
+# check permissions for: /var/www/html
+$ ls -ld /var/www/html
+
+# Output: drwxr-xr-x 3 755 www-data 4096 May  4 08:38 /var/www/html
+
 ```
 
 → Fix:
 
 ```bash
 $ chmod -R 755 /var/www/html
+# or
+$ chown -R 755 /var/www/html
 ```
 
 ❌ Host verification failed
