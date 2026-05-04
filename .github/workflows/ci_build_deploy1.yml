@@ -65,10 +65,10 @@ jobs:
       - name: Copy Files to VPS (SCP)
         # scp [opsi] /path/sumber user@IP_Server:/path/tujuan
         run: |
-          scp -r dist/* ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/var/www/html/
-          chown -R 755 /var/www/html
-          chown -R www-data:www-data /var/www/html
+          scp -r dist/* ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/var/www/app/
+          chown -R 755 /var/www/app/
+          chown -R www-data:www-data /var/www/app/
 
-#      - name: Execute Remote Command (SSH)
-#        run: |
-#          ssh {{ secrets.VPS_USER }}@{{ secrets.VPS_HOST }} "echo Deployment Done!"
+      - name: Execute Remote Command (SSH)
+        run: |
+          ssh {{ secrets.VPS_USER }}@{{ secrets.VPS_HOST }} "echo Deployment Done!"
