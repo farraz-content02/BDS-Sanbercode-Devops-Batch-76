@@ -58,8 +58,9 @@ jobs:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
           source: 'dist/*'
-          target: '/backend-node' # Sesuaikan path di VPS kalian
+          target: '~/backend-node' # Sesuaikan path di VPS kalian
           strip_components: 1 # removes "dist/" nesting (important)
 
       # 3. Execute remote command via SSH
@@ -69,9 +70,10 @@ jobs:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
           script: |
-            echo "Memulai proses restart service di VPS..."
-            pm2 restart
             echo "Memulai proses deployment di VPS..."
             ls -la ~/backend-node
             echo "Deployment Production Sukses!"
+            echo "Memulai proses restart service di VPS..."
+            pm2 restart all || echo "No process to restart"
