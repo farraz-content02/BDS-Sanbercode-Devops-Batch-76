@@ -31,10 +31,10 @@ jobs:
           MY_SECRET_KEY: ${{ secrets.MY_SECRET_KEY }}
 
         run: |
-          echo "Pipeline Berjalan Sukses di GitHub Actions!"          
+          echo "From (main.yml) - Pipeline Berjalan Sukses di GitHub Actions!"          
           echo "Memeriksa secret key..."          
           echo "Secret key is set and masked successfully."
-          echo "::add-mask::$MY_SECRET_KEY"
+        #  echo "::add-mask::$MY_SECRET_KEY"
         # Mask the secret in logs
         # Note: GitHub automatically masks secrets in logs, but this ensures it's masked even if echoed directly
         # Use this pattern to prevent accidental exposure in logs during debugging
